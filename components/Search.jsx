@@ -1,6 +1,8 @@
-import {useEffect} from "react";
+import useSearch from "../hooks/useSearch.js";
 
 export default function Search() {
+    const [searchInput] = useSearch();
+
     return (
         <label className="input w-full">
             <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -15,7 +17,7 @@ export default function Search() {
                     <path d="m21 21-4.3-4.3"></path>
                 </g>
             </svg>
-            <input type="search" className="grow" placeholder="Search"/>
+            <input ref={searchInput} type="search" className="grow" placeholder="Search"/>
             <kbd className="kbd kbd-sm">⌘ K</kbd>
         </label>
     )
