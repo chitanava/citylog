@@ -1,9 +1,49 @@
 {
-  "posts": [
-    { "id": 1, "title": "json-server", "author": "typicode" }
-  ],
-  "comments": [
-    { "id": 1, "body": "some comment", "postId": 1 }
-  ],
-  "profile": { "name": "typicode" }
+  "cities": [
+    {
+      "id": 1,
+      "cityName": "Paris",
+      "country": "France",
+      "coordinates": {
+        "lat": 48.8566,
+        "lng": 2.3522
+      }
+    },
+    {
+      "id": 2,
+      "cityName": "Tokyo",
+      "country": "Japan",
+      "coordinates": {
+        "lat": 35.6762,
+        "lng": 139.6503
+      }
+    },
+    {
+      "id": 3,
+      "cityName": "New York",
+      "country": "United States",
+      "coordinates": {
+        "lat": 40.7128,
+        "lng": -74.0060
+      }
+    },
+    {
+      "id": 4,
+      "cityName": "London",
+      "country": "United Kingdom",
+      "coordinates": {
+        "lat": 51.5074,
+        "lng": -0.1278
+      }
+    },
+    {
+      "id": 5,
+      "cityName": "Sydney",
+      "country": "Australia",
+      "coordinates": {
+        "lat": -33.8688,
+        "lng": 151.2093
+      }
+    }
+  ]
 }
