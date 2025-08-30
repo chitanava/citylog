@@ -6,8 +6,9 @@ import ContentPanel from "../components/ContentPanel.jsx";
 import Loading from "../components/Loading.jsx";
 
 export default function Cities() {
-    const {fetchCities, isLoading} = useCities();
+    const {cities, fetchCities, isLoading} = useCities();
     const [showContent, setShowContent] = useState(false);
+    const [search, setSearch] = useState("");
 
     useEffect(() => {
         (async () => {
@@ -16,14 +17,18 @@ export default function Cities() {
         })()
     }, [fetchCities]);
 
+    const filteredCities = search.length > 0
+        ? cities.filter(city => city.cityName.toLowerCase().includes(search.toLowerCase()))
+        : cities;
+
     if (isLoading) {
         return <Loading/>;
     }
 
     return showContent &&
         (<ContentPanel>
-            <Search/>
-            <CityList/>
+            <Search search={search} onSearch={setSearch}/>
+            <CityList cities={filteredCities}/>
         </ContentPanel>)
 
 }

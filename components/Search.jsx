@@ -1,6 +1,6 @@
 import useSearch from "../hooks/useSearch.js";
 
-export default function Search() {
+export default function Search({search, onSearch}) {
     const [searchInput] = useSearch();
 
     return (
@@ -17,7 +17,8 @@ export default function Search() {
                     <path d="m21 21-4.3-4.3"></path>
                 </g>
             </svg>
-            <input ref={searchInput} type="search" className="grow" placeholder="Search"/>
+            <input ref={searchInput} value={search} onChange={(e) => onSearch(e.target.value)} type="search"
+                   className="grow" placeholder="Search"/>
             <kbd className="kbd kbd-sm">⌘ K</kbd>
         </label>
     )
