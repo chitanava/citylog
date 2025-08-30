@@ -15,6 +15,8 @@ function reducer(state, action) {
             return {...state, cities: action.payload, isLoading: false};
         case "cities/loading":
             return {...state, isLoading: true};
+        case "cities/delete":
+            return {...state, cities: state.cities.filter(cities => cities.id !== action.payload)};
         default:
             throw new Error(`Unknown action type ${action.type}`);
     }
@@ -44,11 +46,27 @@ export default function CitiesProvider({children}) {
         // console.log(data)
     }, [])
 
+    async function deleteCity(cityId) {
+        const res = await fetch(`${VITE_API_URL}/cities/${cityId}`, {
+            method: "DELETE",
+        });
+
+        if (res.ok === false) {
+            throw new Error("Error deleting city!");
+        }
+
+        dispatch({
+            type: "cities/delete",
+            payload: cityId,
+        })
+    }
+
     return (
         <CitiesContext.Provider value={{
             cities,
             isLoading,
             fetchCities,
+            deleteCity
         }}>
             {children}
         </CitiesContext.Provider>
