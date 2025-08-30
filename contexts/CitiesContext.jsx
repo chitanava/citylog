@@ -1,0 +1,66 @@
+import {createContext, useCallback, useContext, useReducer} from "react";
+
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+
+const CitiesContext = createContext();
+
+const initialState = {
+    cities: [],
+    isLoading: false,
+};
+
+function reducer(state, action) {
+    switch (action.type) {
+        case "cities/fetched":
+            return {...state, cities: action.payload, isLoading: false};
+        case "cities/loading":
+            return {...state, isLoading: true};
+        default:
+            throw new Error(`Unknown action type ${action.type}`);
+    }
+}
+
+export default function CitiesProvider({children}) {
+    const [{cities, isLoading}, dispatch] = useReducer(reducer, initialState);
+
+    const fetchCities = useCallback(async () => {
+        try {
+            dispatch({
+                type: "cities/loading",
+            })
+
+            const res = await fetch(`${VITE_API_URL}/cities`);
+            const data = await res.json();
+
+            dispatch({
+                type: "cities/fetched",
+                payload: data,
+            })
+        } catch (err) {
+            console.error(err.message);
+        }
+
+
+        // console.log(data)
+    }, [])
+
+    return (
+        <CitiesContext.Provider value={{
+            cities,
+            isLoading,
+            fetchCities,
+        }}>
+            {children}
+        </CitiesContext.Provider>
+    )
+}
+
+export function useCities() {
+    const context = useContext(CitiesContext);
+
+    if (context === undefined) {
+        throw new Error('Contexts must be used within CitiesProvider!');
+    }
+
+    return context;
+}
