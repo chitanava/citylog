@@ -49,6 +49,36 @@
         "lat": -33.8688,
         "lng": 151.2093
       }
+    },
+    {
+      "id": 6,
+      "cityName": "Tbilisi",
+      "country": "Georgia",
+      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/8L07WqeX/us.svg",
+      "coordinates": {
+        "lat": -33.8688,
+        "lng": 151.2093
+      }
+    },
+    {
+      "id": 7,
+      "cityName": "Batumi",
+      "country": "Georgia",
+      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/8L07WqeX/us.svg",
+      "coordinates": {
+        "lat": -33.8688,
+        "lng": 151.2093
+      }
+    },
+    {
+      "id": 8,
+      "cityName": "Gori",
+      "country": "Georgia",
+      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/8L07WqeX/us.svg",
+      "coordinates": {
+        "lat": -33.8688,
+        "lng": 151.2093
+      }
     }
   ]
 }
