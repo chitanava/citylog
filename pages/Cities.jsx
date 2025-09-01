@@ -12,13 +12,9 @@ export default function Cities() {
             return;
         }
 
-        (async () => {
-            try {
-                await fetchCities();
-            } catch (err) {
-                console.error(err.message);
-            }
-        })()
+        fetchCities().catch((err) => {
+            console.error(err.message);
+        })
     }, [fetchCities, loaded]);
 
     const filteredCities = search.length > 0
