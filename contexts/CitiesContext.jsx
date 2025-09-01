@@ -26,24 +26,22 @@ export default function CitiesProvider({children}) {
     const [{cities, isLoading}, dispatch] = useReducer(reducer, initialState);
 
     const fetchCities = useCallback(async () => {
-        try {
-            dispatch({
-                type: "cities/loading",
-            })
+        dispatch({
+            type: "cities/loading",
+        })
 
-            const res = await fetch(`${VITE_API_URL}/cities`);
-            const data = await res.json();
+        const res = await fetch(`${VITE_API_URL}/cities`);
 
-            dispatch({
-                type: "cities/fetched",
-                payload: data,
-            })
-        } catch (err) {
-            console.error(err.message);
+        if (!res.ok) {
+            throw new Error("Error fetching Cities!");
         }
 
+        const data = await res.json();
 
-        // console.log(data)
+        dispatch({
+            type: "cities/fetched",
+            payload: data,
+        })
     }, [])
 
     async function deleteCity(cityId) {

@@ -1,14 +1,21 @@
 import Navigation from "../components/Navigation.jsx";
 import Map from "../components/Map.jsx";
 import {Outlet} from "react-router-dom";
+import ThemeController from "../components/ThemeController.jsx";
 
 export default function Layout() {
     return (
-        <div className="grid grid-cols-[450px_1fr] h-screen">
-            <div className="bg-base-200 p-8 space-y-6">
-                <Navigation/>
-                <Outlet/>
+        <div className="grid grid-cols-[auto_1fr] h-screen">
+            <div className="flex">
+                <div className="bg-base-300 px-3 relative z-10">
+                    <ThemeController/>
+                    <Navigation/>
+                </div>
+                <div className="w-96 shadow-xl">
+                    <Outlet/>
+                </div>
             </div>
+
             <Map/>
         </div>
     )
