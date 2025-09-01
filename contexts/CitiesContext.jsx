@@ -7,12 +7,13 @@ const CitiesContext = createContext();
 const initialState = {
     cities: [],
     isLoading: false,
+    loaded: false,
 };
 
 function reducer(state, action) {
     switch (action.type) {
         case "cities/fetched":
-            return {...state, cities: action.payload, isLoading: false};
+            return {...state, cities: action.payload, isLoading: false, loaded: true};
         case "cities/loading":
             return {...state, isLoading: true};
         case "cities/delete":
@@ -23,7 +24,7 @@ function reducer(state, action) {
 }
 
 export default function CitiesProvider({children}) {
-    const [{cities, isLoading}, dispatch] = useReducer(reducer, initialState);
+    const [{cities, isLoading, loaded}, dispatch] = useReducer(reducer, initialState);
 
     const fetchCities = useCallback(async () => {
         dispatch({
@@ -64,7 +65,8 @@ export default function CitiesProvider({children}) {
             cities,
             isLoading,
             fetchCities,
-            deleteCity
+            deleteCity,
+            loaded
         }}>
             {children}
         </CitiesContext.Provider>
