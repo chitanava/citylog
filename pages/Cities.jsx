@@ -1,21 +1,11 @@
 import Search from "../components/Search.jsx";
-import {useCities} from "../contexts/CitiesContext.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import CityList from "../components/CityList.jsx";
+import useFetchCities from "../hooks/useFetchCities.js";
 
 export default function Cities() {
-    const {cities, fetchCities, loaded} = useCities();
+    const [cities, loaded] = useFetchCities();
     const [search, setSearch] = useState("");
-
-    useEffect(() => {
-        if (loaded) {
-            return;
-        }
-
-        fetchCities().catch((err) => {
-            console.error(err.message);
-        })
-    }, [fetchCities, loaded]);
 
     const filteredCities = search.length > 0
         ? cities.filter(city => city.cityName.toLowerCase().includes(search.toLowerCase()))
