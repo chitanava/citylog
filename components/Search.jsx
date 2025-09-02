@@ -6,7 +6,7 @@ export default function Search({search, onSearch}) {
     return (
         <div className="h-[90px] flex items-center">
             <div className="px-4 grow">
-                <label className="input w-full">
+                <label className="input w-full rounded-full">
                     <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                         <g
                             strokeLinejoin="round"

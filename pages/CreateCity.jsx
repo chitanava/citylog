@@ -27,9 +27,9 @@ export default function CreateCity() {
                         <textarea className="textarea h-24"></textarea>
                         <div className="label">Notes about your trip to Milan</div>
                     </fieldset>
-                    <div className="flex justify-between">
-                        <button className="btn btn-ghost">Cancel</button>
-                        <button className="btn btn-success">Add</button>
+                    <div className="">
+                        <button className="btn btn-circle btn-block btn-info mb-4">Add</button>
+                        <button className="btn btn-circle btn-block btn-soft">Cancel</button>
                     </div>
                 </form>
             </div>
