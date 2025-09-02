@@ -4,6 +4,8 @@ import {Outlet} from "react-router-dom";
 import ThemeController from "../components/ThemeController.jsx";
 
 export default function Layout() {
+
+
     return (
         <div className="grid grid-cols-[auto_1fr] h-screen">
             <div className="flex">
@@ -11,7 +13,7 @@ export default function Layout() {
                     <ThemeController/>
                     <Navigation/>
                 </div>
-                <div className="w-96 shadow-xl">
+                <div className="w-96 shadow-2xl">
                     <Outlet/>
                 </div>
             </div>
