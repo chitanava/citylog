@@ -2,6 +2,7 @@ import {MapContainer, Marker, Popup, TileLayer, useMapEvent} from "react-leaflet
 import * as L from "leaflet";
 import {useCities} from "../contexts/CitiesContext.jsx";
 import {useNavigate} from "react-router-dom";
+import formatDate from "../utils/date";
 
 const locationIcon = L.divIcon({
     html: `<svg xmlns="http://www.w3.org/2000/svg" 
@@ -29,25 +30,17 @@ export default function Map() {
                 url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
             />
             {
-                cities.map(city => {
-                        const date = Intl.DateTimeFormat("en-GB", {
-                            month: "short",
-                            day: "numeric",
-                            year: "numeric",
-                        }).format(new Date(city.date));
-
-                        return (
-                            <Marker position={[city.coordinates.lat, city.coordinates.lng]} icon={locationIcon}
-                                    key={city.id}>
-                                <Popup>
-                                    <div>
-                                        <div className="text-lg font-bold">{city.cityName}</div>
-                                        <div className="text-xs text-base-content/60">{city.country}, {date}</div>
-                                    </div>
-                                </Popup>
-                            </Marker>)
-                    }
-                )
+                cities.map(city => (
+                    <Marker position={[city.coordinates.lat, city.coordinates.lng]} icon={locationIcon}
+                            key={city.id}>
+                        <Popup>
+                            <div>
+                                <div className="text-lg font-bold">{city.cityName}</div>
+                                <div
+                                    className="text-xs text-base-content/60">{city.country}, {formatDate(city.date)}</div>
+                            </div>
+                        </Popup>
+                    </Marker>))
             }
             <MapClickEvent/>
         </MapContainer>
