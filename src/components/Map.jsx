@@ -33,10 +33,13 @@ const activeLocationIcon = L.divIcon({
 export default function Map() {
     const {cities} = useCities();
     const [position, setPosition] = useState([50, 0]);
-    const [lat, lng] = useUrlCoordinates();
+    const [lat, lng, shouldCenter] = useUrlCoordinates();
 
     useEffect(() => {
-        if (lat && lng) setPosition([lat, lng]);
+        if (lat && lng) {
+            setPosition([lat, lng])
+        }
+
     }, [lat, lng]);
 
     return (
@@ -59,23 +62,27 @@ export default function Map() {
                     </Marker>))
             }
 
-            {lat && lng && <Marker position={[lat, lng]} icon={activeLocationIcon} key={crypto.randomUUID()}/>}
+            {lat && lng && <Marker position={[lat, lng]} icon={activeLocationIcon}/>}
 
-            <ChangeCenter position={position}/>
-
-            <MapClickEvent/>
+            <MoveMapTo position={position} shouldCenter={shouldCenter}/>
+            <MapClickHandler/>
         </MapContainer>
     )
 }
 
-function ChangeCenter({position}) {
+function MoveMapTo({position, shouldCenter}) {
     const map = useMap();
-    map.setView(position);
+
+    useEffect(() => {
+        if (shouldCenter === 'true') {
+            map.setView(position);
+        }
+    }, [map, position, shouldCenter]);
 
     return null;
 }
 
-function MapClickEvent() {
+function MapClickHandler() {
     const navigate = useNavigate();
 
     useMapEvent('click', (e) => {
