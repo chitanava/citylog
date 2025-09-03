@@ -1,5 +1,6 @@
 import {NavLink} from "react-router-dom";
 import {useCities} from "../contexts/CitiesContext.jsx";
+import LoadingSpinner from "./LoadingSpinner.jsx";
 
 export default function Navigation() {
     const {isLoading} = useCities();
@@ -16,7 +17,7 @@ export default function Navigation() {
                                     {
                                         isActive
                                             ? isLoading
-                                                ? <span className="loading loading-spinner loading-xs"></span>
+                                                ? <LoadingSpinner/>
                                                 : (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                         fill="currentColor" className="size-6">
                                                     <path fillRule="evenodd"
@@ -48,7 +49,7 @@ export default function Navigation() {
                                     {
                                         isActive
                                             ? isLoading
-                                                ? <span className="loading loading-spinner loading-xs"></span>
+                                                ? <LoadingSpinner/>
                                                 : (<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                                         fill="currentColor" className="size-6">
                                                     <path fillRule="evenodd"

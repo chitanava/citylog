@@ -3,7 +3,7 @@ import {useEffect} from "react";
 
 export default function useFetchCities() {
     const {cities, fetchCities, loaded} = useCities();
-    
+
     useEffect(() => {
         if (loaded) {
             return;

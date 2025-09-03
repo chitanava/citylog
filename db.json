@@ -49,14 +49,14 @@
       "id": 4
     },
     {
-      "cityName": "Hayton",
-      "country": "United Kingdom of Great Britain and Northern Ireland (the)",
-      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/BFXrxLsq/gb.svg",
+      "cityName": "Luche-Pringe",
+      "country": "France",
+      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/BCyLfEtS/fr.svg",
       "note": "",
       "date": "2025-09-01T00:00:00.000Z",
       "coordinates": {
-        "lat": "54.901882187385006",
-        "lng": "-2.7752465989415014"
+        "lat": "47.69497434186282",
+        "lng": "0.12663614144746485"
       },
       "id": 5
     }
