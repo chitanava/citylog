@@ -1,8 +1,10 @@
-import {MapContainer, Marker, Popup, TileLayer, useMapEvent} from "react-leaflet";
+import {MapContainer, Marker, Popup, TileLayer, useMap, useMapEvent} from "react-leaflet";
 import * as L from "leaflet";
 import {useCities} from "../contexts/CitiesContext.jsx";
 import {useNavigate} from "react-router-dom";
 import formatDate from "../utils/date";
+import {useEffect, useState} from "react";
+import useUrlCoordinates from "../hooks/useUrlCoordinates.js";
 
 const locationIcon = L.divIcon({
     html: `<svg xmlns="http://www.w3.org/2000/svg" 
@@ -21,10 +23,15 @@ const locationIcon = L.divIcon({
 
 export default function Map() {
     const {cities} = useCities();
-    const position = [51.505, -0.09];
+    const [position, setPosition] = useState([50, 0]);
+    const [lat, lng] = useUrlCoordinates();
+
+    useEffect(() => {
+        if (lat && lng) setPosition([lat, lng]);
+    }, [lat, lng]);
 
     return (
-        <MapContainer center={position} zoom={6} scrollWheelZoom={true} zoomControl={false} className="h-screen">
+        <MapContainer center={position} zoom={5} scrollWheelZoom={true} zoomControl={false} className="h-screen">
             <TileLayer
                 attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
@@ -42,9 +49,19 @@ export default function Map() {
                         </Popup>
                     </Marker>))
             }
+
+            <ChangeCenter position={position}/>
+
             <MapClickEvent/>
         </MapContainer>
     )
+}
+
+function ChangeCenter({position}) {
+    const map = useMap();
+    map.setView(position);
+
+    return null;
 }
 
 function MapClickEvent() {
