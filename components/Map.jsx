@@ -1,5 +1,6 @@
 import {MapContainer, Marker, Popup, TileLayer} from "react-leaflet";
 import * as L from "leaflet";
+import {useCities} from "../contexts/CitiesContext.jsx";
 
 const locationIcon = L.divIcon({
     html: `<svg xmlns="http://www.w3.org/2000/svg" 
@@ -17,7 +18,8 @@ const locationIcon = L.divIcon({
 });
 
 export default function Map() {
-    const position = [51.505, -0.09]
+    const {cities} = useCities();
+    const position = [51.505, -0.09];
 
     return (
         <MapContainer center={position} zoom={6} scrollWheelZoom={true} zoomControl={false} className="h-screen">
@@ -25,11 +27,16 @@ export default function Map() {
                 attribution='&copy; <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png"
             />
-            <Marker position={position} icon={locationIcon}>
-                <Popup>
-                    A pretty CSS3 popup. <br/> Easily customizable.
-                </Popup>
-            </Marker>
+            {
+                cities.map(city => (<Marker position={[city.coordinates.lat, city.coordinates.lng]} icon={locationIcon}>
+                    <Popup>
+                        <div>
+                            <div className="text-lg font-bold">{city.cityName}</div>
+                            <div className="text-xs text-base-content/60">{city.country}, 22 jul 2025</div>
+                        </div>
+                    </Popup>
+                </Marker>))
+            }
         </MapContainer>
     )
 }
