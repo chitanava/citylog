@@ -18,6 +18,8 @@ function reducer(state, action) {
             return {...state, isLoading: true};
         case "cities/delete":
             return {...state, cities: state.cities.filter(cities => cities.id !== action.payload)};
+        case "cities/create":
+            return {...state, cities: [...state.cities, action.payload]};
         default:
             throw new Error(`Unknown action type ${action.type}`);
     }
@@ -60,13 +62,47 @@ export default function CitiesProvider({children}) {
         })
     }
 
+    async function createCity(data) {
+        const body = {
+            cityName: data.city,
+            country: data.country,
+            flag: data.flag,
+            note: data.note,
+            date: new Date(data.date).toISOString(),
+            coordinates: {
+                lat: data.lat,
+                lng: data.lng
+            }
+        };
+
+        const res = await fetch(`${VITE_API_URL}/cities`, {
+            method: "POST",
+            body: JSON.stringify(body),
+            headers: {
+                "Content-Type": "application/json",
+            }
+        })
+
+        if (!res.ok) {
+            throw new Error("Error creating city!");
+        }
+
+        const createdCity = await res.json();
+
+        dispatch({
+            type: "cities/create",
+            payload: createdCity,
+        });
+    }
+
     return (
         <CitiesContext.Provider value={{
             cities,
             isLoading,
             fetchCities,
             deleteCity,
-            loaded
+            loaded,
+            createCity
         }}>
             {children}
         </CitiesContext.Provider>
