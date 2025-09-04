@@ -9,7 +9,7 @@ export default function CountriesHeader({countries}) {
 
     return (
         <div className="mt-6 mb-8 px-4">
-            <div className="rounded-md bg-orange-50 border-3 border-dashed border-orange-400 p-6">
+            <div className="rounded-md bg-orange-50 dark:bg-base-200 border-3 border-dashed border-orange-400 p-6">
                 <div className="text-center flex justify-center mb-4">
                     <span className="text-orange-400">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"

@@ -1,11 +1,26 @@
+import {useEffect, useState} from "react";
+import useLocalStorage from "../hooks/useLocalStorage.js";
+
 export default function ThemeController() {
+    const [darkMode, setDarkMode] = useLocalStorage("dark", false);
+
+    useEffect(() => {
+        // document.documentElement.classList.toggle("dark", darkMode);
+        document.documentElement.setAttribute("data-theme", darkMode ? "dark" : "nord");
+    }, [darkMode]);
+
+    function handleChange() {
+        setDarkMode(prevMode => !prevMode);
+    }
+
     return (
-        <div className="h-[90px] border-b border-b-base-content/30 flex justify-center items-center mb-8">
+        <div
+            className="h-[90px] border-b border-b-base-content/30 dark:border-b-base-content/10 flex justify-center items-center mb-8">
             <label className="swap swap-rotate">
-                <input type="checkbox" className="theme-controller" value="synthwave"/>
+                <input type="checkbox" className="theme-controller" checked={darkMode} onChange={handleChange}/>
 
                 <svg
-                    className="swap-off size-6 fill-current"
+                    className="swap-on size-6 fill-current"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <path
@@ -13,7 +28,7 @@ export default function ThemeController() {
                 </svg>
 
                 <svg
-                    className="swap-on size-6 fill-current"
+                    className="swap-off size-6 fill-current"
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 24 24">
                     <path

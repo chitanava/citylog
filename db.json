@@ -11,18 +11,6 @@
         "lng": 2.979176767003727
       },
       "id": 1
-    },
-    {
-      "cityName": "Hochstett",
-      "country": "France",
-      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/BCyLfEtS/fr.svg",
-      "note": "",
-      "date": "2025-09-30T00:00:00.000Z",
-      "coordinates": {
-        "lat": 48.777912755501845,
-        "lng": 7.682204102614738
-      },
-      "id": 2
     }
   ]
 }

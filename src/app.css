@@ -3,5 +3,7 @@
 @import "tailwindcss";
 
 @plugin "daisyui" {
-    themes: nord --default;
+    themes: nord --default, dark --prefersdark;;
 }
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
