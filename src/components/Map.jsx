@@ -31,7 +31,7 @@ const activeLocationIcon = L.divIcon({
 });
 
 export default function Map() {
-    const {cities} = useCities();
+    const {cities, selectedCity} = useCities();
     const [position, setPosition] = useState([50, 0]);
     const [lat, lng, shouldCenter] = useUrlCoordinates();
 
@@ -62,7 +62,20 @@ export default function Map() {
                     </Marker>))
             }
 
-            {lat && lng && <Marker position={[lat, lng]} icon={activeLocationIcon}/>}
+            {lat && lng && (<Marker position={[lat, lng]} icon={activeLocationIcon}>
+                {
+                    selectedCity?.coordinates.lng === lng && selectedCity?.coordinates.lat === lat && (
+                        <Popup>
+                            <div>
+                                <div className="text-lg font-bold">{selectedCity.cityName}</div>
+                                <div className="text-xs text-base-content/60">
+                                    {selectedCity.country}, {formatDate(selectedCity.date)}
+                                </div>
+                            </div>
+                        </Popup>)
+                }
+
+            </Marker>)}
 
             <MoveMapTo position={position} shouldCenter={shouldCenter}/>
             <MapClickHandler/>

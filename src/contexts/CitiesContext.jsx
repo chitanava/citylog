@@ -6,6 +6,7 @@ const CitiesContext = createContext();
 
 const initialState = {
     cities: [],
+    selectedCity: null,
     isLoading: false,
     loaded: false,
 };
@@ -16,9 +17,11 @@ function reducer(state, action) {
             return {...state, cities: action.payload, isLoading: false, loaded: true};
         case "cities/loading":
             return {...state, isLoading: true};
-        case "cities/delete":
+        case "city/fetched":
+            return {...state, selectedCity: action.payload, isLoading: false};
+        case "city/delete":
             return {...state, cities: state.cities.filter(cities => cities.id !== action.payload)};
-        case "cities/create":
+        case "city/create":
             return {...state, cities: [...state.cities, action.payload]};
         default:
             throw new Error(`Unknown action type ${action.type}`);
@@ -26,7 +29,7 @@ function reducer(state, action) {
 }
 
 export default function CitiesProvider({children}) {
-    const [{cities, isLoading, loaded}, dispatch] = useReducer(reducer, initialState);
+    const [{cities, isLoading, loaded, selectedCity}, dispatch] = useReducer(reducer, initialState);
 
     const fetchCities = useCallback(async () => {
         dispatch({
@@ -57,7 +60,7 @@ export default function CitiesProvider({children}) {
         }
 
         dispatch({
-            type: "cities/delete",
+            type: "city/delete",
             payload: cityId,
         })
     }
@@ -90,10 +93,29 @@ export default function CitiesProvider({children}) {
         const createdCity = await res.json();
 
         dispatch({
-            type: "cities/create",
+            type: "city/create",
             payload: createdCity,
         });
     }
+
+    const getCity = useCallback(async (cityId) => {
+        dispatch({
+            type: "cities/loading",
+        })
+
+        const res = await fetch(`${VITE_API_URL}/cities/${cityId}`)
+
+        if (!res.ok) {
+            throw new Error("Error fetching city!");
+        }
+
+        const data = await res.json();
+
+        dispatch({
+            type: "city/fetched",
+            payload: data
+        })
+    }, [])
 
     return (
         <CitiesContext.Provider value={{
@@ -102,7 +124,9 @@ export default function CitiesProvider({children}) {
             fetchCities,
             deleteCity,
             loaded,
-            createCity
+            createCity,
+            getCity,
+            selectedCity
         }}>
             {children}
         </CitiesContext.Provider>

@@ -1,64 +1,28 @@
 {
   "cities": [
     {
-      "cityName": "Villeneuve-le-Comte",
+      "cityName": "Jouet-sur-l'Aubois",
       "country": "France",
       "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/BCyLfEtS/fr.svg",
-      "note": "",
-      "date": "2025-09-17T00:00:00.000Z",
+      "note": "dasdsdsa",
+      "date": "2025-09-01T00:00:00.000Z",
       "coordinates": {
-        "lat": "48.821332549646655",
-        "lng": "2.808679280291826"
+        "lat": 47.040182144806664,
+        "lng": 2.979176767003727
       },
       "id": 1
     },
     {
-      "cityName": "Attert",
-      "country": "Belgium",
-      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/sYJZUWmL/be.svg",
+      "cityName": "Hochstett",
+      "country": "France",
+      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/BCyLfEtS/fr.svg",
       "note": "",
-      "date": "2025-09-23T00:00:00.000Z",
+      "date": "2025-09-30T00:00:00.000Z",
       "coordinates": {
-        "lat": "49.75287993415023",
-        "lng": "5.798497861298683"
+        "lat": 48.777912755501845,
+        "lng": 7.682204102614738
       },
       "id": 2
-    },
-    {
-      "cityName": "Bindernheim",
-      "country": "France",
-      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/BCyLfEtS/fr.svg",
-      "note": "",
-      "date": "2025-09-25T00:00:00.000Z",
-      "coordinates": {
-        "lat": "48.28319289548349",
-        "lng": "7.623166554119037"
-      },
-      "id": 3
-    },
-    {
-      "cityName": "Poinson-les-Fayl",
-      "country": "France",
-      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/BCyLfEtS/fr.svg",
-      "note": "",
-      "date": "2025-09-24T00:00:00.000Z",
-      "coordinates": {
-        "lat": "47.754097979680026",
-        "lng": "5.578658259754039"
-      },
-      "id": 4
-    },
-    {
-      "cityName": "Luche-Pringe",
-      "country": "France",
-      "flag": "https://api-ninjas-data.s3.us-west-2.amazonaws.com/flags/4x3/BCyLfEtS/fr.svg",
-      "note": "",
-      "date": "2025-09-01T00:00:00.000Z",
-      "coordinates": {
-        "lat": "47.69497434186282",
-        "lng": "0.12663614144746485"
-      },
-      "id": 5
     }
   ]
 }

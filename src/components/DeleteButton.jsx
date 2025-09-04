@@ -1,7 +1,7 @@
 export default function DeleteButton({cityId, isDeleting, onDelete}) {
     return (
         <button
-            onClick={() => onDelete(cityId)}
+            onClick={(e) => onDelete(e, cityId)}
             className="btn btn-sm btn-circle btn-ghost">
             {isDeleting ? <span className="loading loading-spinner loading-xs"></span> : (
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"

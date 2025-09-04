@@ -1,12 +1,15 @@
 import {useCities} from "../contexts/CitiesContext.jsx";
 import {useState} from "react";
 import DeleteButton from "./DeleteButton.jsx";
+import {Link} from "react-router-dom";
 
 export default function CityListItem({city}) {
     const {deleteCity} = useCities();
     const [isDeleting, setIsDeleting] = useState(false);
 
-    async function handleDelete(cityId) {
+    async function handleDelete(e, cityId) {
+        e.preventDefault();
+
         setIsDeleting(true);
 
         try {
@@ -19,7 +22,8 @@ export default function CityListItem({city}) {
 
     return (
         <li className="grid grid-cols-[1fr_auto] items-center">
-            <a href="#" className="flex gap-4 items-center px-6 py-4 hover:bg-base-200">
+            <Link to={`/cities/${city.id}?lat=${city.coordinates.lat}&lng=${city.coordinates.lng}&center=true`}
+                  className="flex gap-4 items-center px-6 py-4 hover:bg-base-200">
                 <img
                     className="mask mask-squircle w-14"
                     src={city.flag}
@@ -36,7 +40,7 @@ export default function CityListItem({city}) {
 
 
                 <DeleteButton cityId={city.id} onDelete={handleDelete} isDeleting={isDeleting}/>
-            </a>
+            </Link>
         </li>
     )
 }
